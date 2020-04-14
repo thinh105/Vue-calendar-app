@@ -12,7 +12,9 @@ module.exports = {
   rules: {
     "prettier/prettier": "error",
     "vue/component-name-in-template-casing": ["error", "PascalCase"],
-    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "prefer-destructuring": ["error", { object: true, array: false }],
+    "no-param-reassign": "error",
+    "no-console": process.env.NODE_ENV === "production" ? "error" : "warn",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
   },
 

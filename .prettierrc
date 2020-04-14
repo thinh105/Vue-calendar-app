@@ -1,3 +1,5 @@
 {
-  "prettier.eslintIntegration": true
+  "singleQuote": true,
+  "vueIndentScriptAndStyle": true,
+  "jsxSingleQuote": true
 }

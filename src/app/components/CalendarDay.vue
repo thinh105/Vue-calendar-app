@@ -1,5 +1,5 @@
 <template>
-  <div class="day column">
+  <div class="day column" @click="setActiveDay(day.id)">
     <div class="day-banner has-text-centered">{{ day.abbvTitle }}</div>
     <div class="day-details">
       <!-- <div class="day-number">{{ day.id }}</div> -->
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { store } from "../store";
 import CalendarEvent from "./CalendarEvent";
 
 export default {
@@ -25,6 +26,11 @@ export default {
     day: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    setActiveDay(dayId) {
+      store.setActiveDay(dayId);
     },
   },
 };
@@ -40,7 +46,7 @@ export default {
   cursor: pointer;
 
   &:hover {
-    background: darken(#4a4a4a, 3%);
+    background: darken(#8b8b8a, 3%);
   }
 
   .day-banner {
