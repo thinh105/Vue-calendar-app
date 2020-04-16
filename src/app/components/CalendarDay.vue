@@ -14,57 +14,57 @@
 </template>
 
 <script>
-import { store } from "../store";
-import CalendarEvent from "./CalendarEvent";
+  import { store } from '../store';
+  import CalendarEvent from './CalendarEvent';
 
-export default {
-  name: "CalendarDay",
-  components: {
-    CalendarEvent,
-  },
-  props: {
-    day: {
-      type: Object,
-      required: true,
+  export default {
+    name: 'CalendarDay',
+    components: {
+      CalendarEvent,
     },
-  },
-  methods: {
-    setActiveDay(dayId) {
-      store.setActiveDay(dayId);
+    props: {
+      day: {
+        type: Object,
+        required: true,
+      },
     },
-  },
-};
+    methods: {
+      setActiveDay(dayId) {
+        store.setActiveDay(dayId);
+      },
+    },
+  };
 </script>
 
 <style lang="scss" scoped>
-.day {
-  background-color: #4a4a4a;
-  color: #fff;
-  border-left: 1px solid #8f8f8f;
-  border-bottom: 1px solid #8f8f8f;
-  font-size: 12px;
-  cursor: pointer;
-
-  &:hover {
-    background: darken(#8b8b8a, 3%);
-  }
-
-  .day-banner {
-    background-color: #333333;
+  .day {
+    background-color: #4a4a4a;
     color: #fff;
-    padding: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    border-left: 1px solid #8f8f8f;
+    border-bottom: 1px solid #8f8f8f;
     font-size: 12px;
-    font-weight: 600;
-  }
+    cursor: pointer;
 
-  .day-details {
-    padding: 10px;
-  }
+    &:hover {
+      background: darken(#8b8b8a, 3%);
+    }
 
-  &:last-child {
-    border-right: 1px solid #8f8f8f;
+    .day-banner {
+      background-color: #333333;
+      color: #fff;
+      padding: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .day-details {
+      padding: 10px;
+    }
+
+    &:last-child {
+      border-right: 1px solid #8f8f8f;
+    }
   }
-}
 </style>
