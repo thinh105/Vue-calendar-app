@@ -42,7 +42,7 @@
     color: #fff;
     border-left: 1px solid #8f8f8f;
     border-bottom: 1px solid #8f8f8f;
-    font-size: 12px;
+    font-size: 16px;
     cursor: pointer;
 
     &:hover {
@@ -55,7 +55,7 @@
       padding: 10px;
       text-transform: uppercase;
       letter-spacing: 1px;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 600;
     }
 
