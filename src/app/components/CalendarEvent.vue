@@ -1,16 +1,34 @@
 <template>
   <div class="day-event" :style="getEventBgColor">
-    <div>
+    <div v-if="!event.edit">
       <span class="has-text-centered details">{{ event.details }}</span>
       <div class="has-text-centered icons edit-hover">
-        <i class="fa fa-pencil-square edit-icon"></i>
+        <i
+          class="fa fa-pencil-square edit-icon"
+          @click="editEvent(day.id, event.details)"
+        ></i>
         <i class="fa fa-trash-o delete-icon"></i>
+      </div>
+    </div>
+
+    <div v-if="event.edit">
+      <input
+        v-model="newEditedDetails"
+        type="text"
+        @keyup.enter="submitEditEvent(day.id, event.details, newEditedDetails)"
+      />
+      <div class="has-text-centered icons">
+        <i
+          class="fa fa-check"
+          @click="submitEditEvent(day.id, event.details, newEditedDetails)"
+        ></i>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import { store } from '../store';
   export default {
     name: 'CalendarEvent',
     props: {
@@ -23,8 +41,14 @@
         required: true,
       },
     },
+    data() {
+      return {
+        newEditedDetails: this.event.details,
+      };
+    },
     computed: {
       getEventBgColor() {
+        // eslint-disable-next-line prettier/prettier
         const colors = [
           '#1abc9c',
           '#3498db',
@@ -43,9 +67,23 @@
           '#95a5a6',
           '#7f8c8d',
         ];
+
         let randomNum = Math.floor(Math.random() * colors.length);
         let randomColor = colors[randomNum];
         return `background-color: ${randomColor}`;
+      },
+    },
+    methods: {
+      editEvent(dayId, eventDetails) {
+        store.editEvent(dayId, eventDetails);
+      },
+
+      submitEditEvent(dayId, oldEventDetails, newEditedDetails) {
+        store.updateEvent(dayId, oldEventDetails, newEditedDetails);
+      },
+
+      deleteEvent(dayId, eventDetails) {
+        store.deleteEvent(dayId, eventDetails);
       },
     },
   };
@@ -62,6 +100,10 @@
 
     .details {
       display: block;
+    }
+
+    ::placeholder {
+      color: #ffffff;
     }
 
     // :hover {
@@ -86,6 +128,8 @@
       border: 0;
       border-bottom: 1px solid #fff;
       width: 100%;
+      color: #ffffff;
+      padding-left: 1em;
 
       &:focus {
         outline: none;

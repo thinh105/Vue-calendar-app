@@ -15,6 +15,33 @@ export const store = {
   },
   submitEvent(eventDetails) {
     const activeDay = this.getActiveDay();
-    activeDay.events.push({ details: eventDetails, edit: false });
+    activeDay.events.push({
+      details: eventDetails,
+      edit: false,
+    });
+  },
+  editEvent(dayId, eventDetails) {
+    this.resetEditStates();
+    const eventObj = this.getEventObj(dayId, eventDetails);
+    eventObj.edit = true;
+  },
+  getEventObj(dayId, eventDetails) {
+    const dayObj = this.state.seedData.find((day) => day.id === dayId);
+    const eventObj = dayObj.events.find(
+      (event) => event.details === eventDetails
+    );
+    return eventObj;
+  },
+  updateEvent(dayId, oldEventDetails, newEditedDetails) {
+    const eventObj = this.getEventObj(dayId, oldEventDetails);
+    eventObj.details = newEditedDetails;
+    eventObj.edit = false;
+  },
+  resetEditStates() {
+    this.state.seedData.map((dayObj) => {
+      dayObj.events.map((event) => {
+        event.edit = false;
+      });
+    });
   },
 };
