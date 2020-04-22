@@ -7,13 +7,16 @@ module.exports = {
     browser: true,
   },
 
-  plugins: ["prettier", "vue"],
+  plugins: ['prettier', 'vue'],
 
   rules: {
-    "prettier/prettier": "error",
-    "vue/component-name-in-template-casing": ["error", "PascalCase"],
-    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    'prettier/prettier': 'error',
+    'vue/component-name-in-template-casing': ['error', 'PascalCase'],
+    'vue/script-indent': ['error', 2, { baseIndent: 1 }],
+    'prefer-destructuring': ['error', { object: true, array: false }],
+    'no-param-reassign': 'error',
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   },
 
   globals: {
@@ -22,13 +25,13 @@ module.exports = {
 
   parserOptions: {
     ecmaVersion: 2019,
-    sourceType: "module",
+    sourceType: 'module',
   },
 
   extends: [
-    "plugin:vue/recommended",
-    "eslint:recommended",
-    "prettier/vue",
-    "plugin:prettier/recommended",
+    'plugin:vue/recommended',
+    'eslint:recommended',
+    'prettier/vue',
+    'plugin:prettier/recommended',
   ],
 };

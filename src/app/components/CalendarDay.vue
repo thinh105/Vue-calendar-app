@@ -1,89 +1,70 @@
 <template>
-  <div class="day column">
+  <div class="day column" @click="setActiveDay(day.id)">
     <div class="day-banner has-text-centered">{{ day.abbvTitle }}</div>
     <div class="day-details">
       <!-- <div class="day-number">{{ day.id }}</div> -->
-      <div class="day-event" style="background-color: rgb(153, 255, 153);">
-        <div>
-          <span class="has-text-centered details">Get Groceries</span>
-          <div class="has-text-centered icons">
-            <i class="fa fa-pencil-square edit-icon"></i>
-            <i class="fa fa-trash-o delete-icon"></i>
-          </div>
-        </div>
-      </div>
+      <CalendarEvent
+        v-for="(event, index) in day.events"
+        :key="index"
+        :event="event"
+        :day="day"
+      />
     </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: "CalendarDay",
-  props: {
-    day: {
-      type: Object,
-      required: true,
+  import { store } from '../store';
+  import CalendarEvent from './CalendarEvent';
+
+  export default {
+    name: 'CalendarDay',
+    components: {
+      CalendarEvent,
     },
-  },
-};
+    props: {
+      day: {
+        type: Object,
+        required: true,
+      },
+    },
+    methods: {
+      setActiveDay(dayId) {
+        store.setActiveDay(dayId);
+      },
+    },
+  };
 </script>
 
 <style lang="scss" scoped>
-.day {
-  background-color: #4a4a4a;
-  color: #fff;
-  border-left: 1px solid #8f8f8f;
-  border-bottom: 1px solid #8f8f8f;
-  font-size: 12px;
-  cursor: pointer;
-
-  &:hover {
-    background: darken(#4a4a4a, 3%);
-  }
-
-  .day-banner {
-    background-color: #333333;
+  .day {
+    background-color: #4a4a4a;
     color: #fff;
-    padding: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 12px;
-    font-weight: 600;
-  }
+    border-left: 1px solid #8f8f8f;
+    border-bottom: 1px solid #8f8f8f;
+    font-size: 16px;
+    cursor: pointer;
 
-  .day-details {
-    padding: 10px;
-  }
-
-  &:last-child {
-    border-right: 1px solid #8f8f8f;
-  }
-
-  .day-event {
-    margin-top: 6px;
-    margin-bottom: 6px;
-    display: block;
-    color: #4c4c4c;
-    padding: 5px;
-
-    .details {
-      display: block;
+    &:hover {
+      background: darken(#8b8b8a, 3%);
     }
 
-    .icons .fa {
-      padding: 0 2px;
+    .day-banner {
+      background-color: #333333;
+      color: #fff;
+      padding: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+      font-weight: 600;
     }
 
-    input {
-      background: none;
-      border: 0;
-      border-bottom: 1px solid #fff;
-      width: 100%;
+    .day-details {
+      padding: 10px;
+    }
 
-      &:focus {
-        outline: none;
-      }
+    &:last-child {
+      border-right: 1px solid #8f8f8f;
     }
   }
-}
 </style>
