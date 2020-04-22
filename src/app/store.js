@@ -44,4 +44,12 @@ export const store = {
       });
     });
   },
+  deleteEvent(dayId, eventDetails) {
+    const dayObj = this.state.seedData.find((day) => day.id === dayId);
+
+    const indexDeletedEvent = dayObj.events.findIndex(
+      (e) => e.details === eventDetails
+    );
+    dayObj.events.splice(indexDeletedEvent, 1);
+  },
 };
